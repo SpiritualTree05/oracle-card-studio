@@ -4,28 +4,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>我與肥貓·神諭占卜·</title>
+<title>我與肥貓·神諭占卜</title>
 <style>
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{
   margin:0;
-  background:#100f0e;
+  background:#100d0a;
   color:#ebd4ae;
   font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif;
 }
 main{
   max-width:600px;
   margin:auto;
-  padding:28px 20px 55px;
+  padding:28px 20px 50px;
 }
 section{display:none}
 section.active{display:block}
 
-/* 首頁 */
+/* 黑貓封面 */
 body:has(#home.active) main{
   max-width:1024px;
   padding:0;
+}
+body:has(#home.active) footer{
+  display:none;
 }
 .cover{
   position:relative;
@@ -38,65 +40,53 @@ body:has(#home.active) main{
 }
 .hotspot{
   position:absolute;
-  margin:0;
+  display:block;
   padding:0;
+  margin:0;
   border:0;
   border-radius:0;
   background:transparent;
   cursor:pointer;
 }
 .hotspot:focus-visible{
-  outline:3px solid #f2c77e;
+  outline:3px solid #e7b56d;
   outline-offset:-3px;
 }
-.hotspot.start{
+.start{
   left:22%;
-  top:61.4%;
+  top:57.8%;
   width:56%;
-  height:5.4%;
+  height:5.7%;
 }
-.hotspot.feature1{
+.feature1{
   left:5%;
-  top:68.5%;
+  top:65.5%;
   width:44%;
-  height:11%;
+  height:11.2%;
 }
-.hotspot.feature2{
+.feature2{
   right:5%;
-  top:68.5%;
+  top:65.5%;
   width:44%;
-  height:11%;
+  height:11.2%;
 }
-.hotspot.feature3{
+.feature3{
   left:5%;
-  top:80.7%;
+  top:77.8%;
   width:44%;
-  height:11%;
+  height:10.8%;
 }
-.hotspot.feature4{
+.feature4{
   right:5%;
-  top:80.7%;
+  top:77.8%;
   width:44%;
-  height:11%;
-}
-
-/* 遮住封面右上角原有的三條線圖示。
-   如果封面該區不是純黑色，遮罩可能略有色差。 */
-.cover .menu-mask{
-  position:absolute;
-  right:3%;
-  top:1.5%;
-  width:12%;
-  height:4%;
-  background:#100f0e;
-  pointer-events:none;
+  height:10.8%;
 }
 
 /* 內頁 */
 h2{
   font-size:27px;
   line-height:1.5;
-  margin:14px 0;
 }
 p{
   color:#c4b4a2;
@@ -104,15 +94,15 @@ p{
 }
 button{
   cursor:pointer;
+  width:100%;
+  padding:16px 20px;
+  margin-top:14px;
   border:1px solid #a98454;
+  border-radius:13px;
   background:#c9a16a;
   color:#17120f;
-  border-radius:13px;
-  padding:16px 20px;
   font-size:17px;
   font-weight:700;
-  width:100%;
-  margin-top:14px;
 }
 button.secondary{
   background:transparent;
@@ -148,16 +138,16 @@ button.secondary{
   color:#b9a999;
   line-height:1.6;
 }
-.choice .symbol{font-size:30px}
+.symbol{font-size:30px}
 textarea{
   width:100%;
   min-height:110px;
   margin-top:10px;
-  background:#171411;
+  padding:15px;
   border:1px solid #806342;
   border-radius:10px;
+  background:#171411;
   color:#f5e4c8;
-  padding:15px;
   font:inherit;
 }
 #result{display:none}
@@ -168,7 +158,6 @@ footer{
   color:#bca587;
   font-size:13px;
 }
-body:has(#home.active) footer{display:none}
 @media(max-width:350px){
   .grid{grid-template-columns:1fr}
 }
@@ -178,15 +167,13 @@ body:has(#home.active) footer{display:none}
 <body>
 <main>
 
-<!-- 首頁：完整黑貓封面 -->
+<!-- 第一頁：正式黑貓封面 -->
 <section id="home" class="active">
   <div class="cover">
     <img
-      src="4274A927-5204-4292-8714-4CF10619692F.png"
+      src="18B334E2-A47B-4FFC-B53E-040793AACE58.png"
       alt="我與肥貓·神諭占卜黑貓封面"
     >
-
-    <div class="menu-mask" aria-hidden="true"></div>
 
     <button class="hotspot start"
       aria-label="開始探索占卜服務"
@@ -210,7 +197,7 @@ body:has(#home.active) footer{display:none}
   </div>
 </section>
 
-<!-- 服務選單 -->
+<!-- 第二頁：選擇占卜服務 -->
 <section id="services">
   <h2>選擇占卜服務</h2>
   <p>請選擇最接近你目前疑惑的方向。</p>
@@ -254,7 +241,7 @@ body:has(#home.active) footer{display:none}
   </button>
 </section>
 
-<!-- 抽牌頁面 -->
+<!-- 第三頁：抽牌 -->
 <section id="reading">
   <h2 id="topic">神諭牌占卜</h2>
   <p>靜下心來，想著你想詢問的問題。</p>
@@ -275,7 +262,7 @@ body:has(#home.active) footer{display:none}
   </button>
 </section>
 
-<!-- 資訊頁面 -->
+<!-- 資訊頁 -->
 <section id="info">
   <h2 id="infoTitle"></h2>
   <div class="panel">
@@ -299,50 +286,50 @@ let selected = "神諭占卜";
 
 function go(id){
   document.querySelectorAll("section").forEach(
-    section => section.classList.remove("active")
+    x => x.classList.remove("active")
   );
   document.getElementById(id).classList.add("active");
   window.scrollTo(0,0);
 }
 
 function choose(topic){
-  selected = topic;
-  document.getElementById("topic").textContent = topic;
-  document.getElementById("result").style.display = "none";
+  selected=topic;
+  document.getElementById("topic").textContent=topic;
+  document.getElementById("result").style.display="none";
   go("reading");
 }
 
 function showInfo(type){
-  const title = document.getElementById("infoTitle");
-  const text = document.getElementById("infoText");
+  const title=document.getElementById("infoTitle");
+  const text=document.getElementById("infoText");
 
-  if(type === "payment"){
-    title.textContent = "付款方式";
-    text.textContent = "LINE Pay Money、銀行轉帳";
+  if(type==="payment"){
+    title.textContent="付款方式";
+    text.textContent="LINE Pay Money、銀行轉帳";
   }else{
-    title.textContent = "尊重隱私";
-    text.textContent =
+    title.textContent="尊重隱私";
+    text.textContent=
       "我們重視你的個人資料與占卜問題，並將提供清楚的資料處理與隱私說明。";
   }
   go("info");
 }
 
 function draw(){
-  const i = Math.floor(Math.random()*names.length);
-  const reverse = Math.random()<0.5;
-  const side = reverse ? "逆位" : "正位";
+  const i=Math.floor(Math.random()*names.length);
+  const reverse=Math.random()<0.5;
+  const side=reverse?"逆位":"正位";
 
-  document.getElementById("cardname").textContent =
-    "#" + i + " " + names[i] + "（" + side + "）";
+  document.getElementById("cardname").textContent=
+    "#"+i+" "+names[i]+"（"+side+"）";
 
-  document.getElementById("meaning").textContent =
-    "關鍵字：" + words[i] + "。這張牌在" + selected +
-    "的問題中，" +
+  document.getElementById("meaning").textContent=
+    "關鍵字："+words[i]+"。這張牌在"+selected+
+    "的問題中，"+
     (reverse
-      ? "提醒你留意阻礙、情緒與尚未處理的課題，先調整步調。"
-      : "鼓勵你從這項特質尋找新的方向，並以實際行動逐步前進。");
+      ?"提醒你留意阻礙、情緒與尚未處理的課題，先調整步調。"
+      :"鼓勵你從這項特質尋找新的方向，並以實際行動逐步前進。");
 
-  document.getElementById("result").style.display = "block";
+  document.getElementById("result").style.display="block";
 }
 </script>
 </body>
