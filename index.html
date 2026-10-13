@@ -3,276 +3,219 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>我與肥貓·神諭占卜</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我與肥貓·神諭占卜·</title>
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#100f0e;
+  color:#ebd4ae;
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif;
+}
+main{
+  max-width:600px;
+  margin:auto;
+  padding:28px 20px 55px;
+}
+section{display:none}
+section.active{display:block}
+
+/* 首頁 */
+body:has(#home.active) main{
+  max-width:1024px;
+  padding:0;
+}
+.cover{
+  position:relative;
+  width:100%;
+}
+.cover img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.hotspot{
+  position:absolute;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  cursor:pointer;
+}
+.hotspot:focus-visible{
+  outline:3px solid #f2c77e;
+  outline-offset:-3px;
+}
+.hotspot.start{
+  left:22%;
+  top:61.4%;
+  width:56%;
+  height:5.4%;
+}
+.hotspot.feature1{
+  left:5%;
+  top:68.5%;
+  width:44%;
+  height:11%;
+}
+.hotspot.feature2{
+  right:5%;
+  top:68.5%;
+  width:44%;
+  height:11%;
+}
+.hotspot.feature3{
+  left:5%;
+  top:80.7%;
+  width:44%;
+  height:11%;
+}
+.hotspot.feature4{
+  right:5%;
+  top:80.7%;
+  width:44%;
+  height:11%;
 }
 
-body {
-  margin: 0;
-  background: #100f0e;
-  color: #ebd4ae;
-  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+/* 遮住封面右上角原有的三條線圖示。
+   如果封面該區不是純黑色，遮罩可能略有色差。 */
+.cover .menu-mask{
+  position:absolute;
+  right:3%;
+  top:1.5%;
+  width:12%;
+  height:4%;
+  background:#100f0e;
+  pointer-events:none;
 }
 
-header {
-  padding: 22px 18px;
-  border-bottom: 1px solid #5d4a34;
-  font-weight: 700;
+/* 內頁 */
+h2{
+  font-size:27px;
+  line-height:1.5;
+  margin:14px 0;
 }
-
-main {
-  max-width: 600px;
-  margin: auto;
-  padding: 28px 20px 55px;
+p{
+  color:#c4b4a2;
+  line-height:1.9;
 }
-
-section {
-  display: none;
+button{
+  cursor:pointer;
+  border:1px solid #a98454;
+  background:#c9a16a;
+  color:#17120f;
+  border-radius:13px;
+  padding:16px 20px;
+  font-size:17px;
+  font-weight:700;
+  width:100%;
+  margin-top:14px;
 }
-
-section.active {
-  display: block;
+button.secondary{
+  background:transparent;
+  color:#dfc18e;
 }
-
-/* 首頁：只顯示完整黑貓封面 */
-body:has(#home.active) header,
-body:has(#home.active) footer {
-  display: none;
+.panel{
+  border:1px solid #594833;
+  background:#1d1a17;
+  border-radius:18px;
+  padding:22px;
+  margin:16px 0;
 }
-
-body:has(#home.active) main {
-  max-width: 1024px;
-  padding: 0;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin:25px 0;
 }
-
-.cover {
-  position: relative;
-  width: 100%;
+.choice{
+  border:1px solid #705537;
+  border-radius:16px;
+  padding:20px 12px;
+  background:#211c17;
+  text-align:center;
+  cursor:pointer;
 }
-
-.cover img {
-  display: block;
-  width: 100%;
-  height: auto;
+.choice b{
+  display:block;
+  font-size:19px;
+  margin:10px 0;
 }
-
-/* 封面圖片上的透明按鈕 */
-.hotspot {
-  position: absolute;
-  display: block;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  cursor: pointer;
+.choice small{
+  color:#b9a999;
+  line-height:1.6;
 }
-
-.hotspot:focus-visible {
-  outline: 3px solid #f2c77e;
-  outline-offset: -3px;
+.choice .symbol{font-size:30px}
+textarea{
+  width:100%;
+  min-height:110px;
+  margin-top:10px;
+  background:#171411;
+  border:1px solid #806342;
+  border-radius:10px;
+  color:#f5e4c8;
+  padding:15px;
+  font:inherit;
 }
-
-.hotspot.start {
-  left: 22%;
-  top: 61.4%;
-  width: 56%;
-  height: 5.4%;
+#result{display:none}
+footer{
+  text-align:center;
+  border-top:1px solid #46382b;
+  padding:24px;
+  color:#bca587;
+  font-size:13px;
 }
-
-/* 四個介紹區塊的透明點擊位置 */
-.hotspot.feature1 {
-  left: 5%;
-  top: 68.5%;
-  width: 44%;
-  height: 11%;
-}
-
-.hotspot.feature2 {
-  right: 5%;
-  top: 68.5%;
-  width: 44%;
-  height: 11%;
-}
-
-.hotspot.feature3 {
-  left: 5%;
-  top: 80.7%;
-  width: 44%;
-  height: 11%;
-}
-
-.hotspot.feature4 {
-  right: 5%;
-  top: 80.7%;
-  width: 44%;
-  height: 11%;
-}
-
-h2 {
-  font-size: 27px;
-  line-height: 1.5;
-}
-
-p {
-  color: #c4b4a2;
-  line-height: 1.9;
-}
-
-button {
-  cursor: pointer;
-  border: 1px solid #a98454;
-  background: #c9a16a;
-  color: #17120f;
-  border-radius: 13px;
-  padding: 16px 20px;
-  font-size: 17px;
-  font-weight: 700;
-  width: 100%;
-  margin-top: 14px;
-}
-
-button.secondary {
-  background: transparent;
-  color: #dfc18e;
-}
-
-.panel {
-  border: 1px solid #594833;
-  background: #1d1a17;
-  border-radius: 18px;
-  padding: 22px;
-  margin: 16px 0;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin: 25px 0;
-}
-
-.choice {
-  border: 1px solid #705537;
-  border-radius: 16px;
-  padding: 20px 12px;
-  background: #211c17;
-  text-align: center;
-  cursor: pointer;
-}
-
-.choice b {
-  display: block;
-  font-size: 19px;
-  margin: 10px 0;
-}
-
-.choice small {
-  color: #b9a999;
-  line-height: 1.6;
-}
-
-.choice .symbol {
-  font-size: 30px;
-}
-
-input,
-textarea {
-  width: 100%;
-  background: #171411;
-  border: 1px solid #806342;
-  border-radius: 10px;
-  color: #f5e4c8;
-  padding: 15px;
-  font: inherit;
-}
-
-textarea {
-  min-height: 110px;
-  margin-top: 10px;
-}
-
-#result {
-  display: none;
-}
-
-footer {
-  text-align: center;
-  border-top: 1px solid #46382b;
-  padding: 24px;
-  color: #bca587;
-  font-size: 13px;
-}
-
-@media (max-width: 350px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+body:has(#home.active) footer{display:none}
+@media(max-width:350px){
+  .grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
-
-<header>☾ 我與肥貓·神諭占卜</header>
-
 <main>
 
-<!-- 第一頁：完整黑貓封面 -->
+<!-- 首頁：完整黑貓封面 -->
 <section id="home" class="active">
   <div class="cover">
-
     <img
       src="4274A927-5204-4292-8714-4CF10619692F.png"
       alt="我與肥貓·神諭占卜黑貓封面"
     >
 
-    <button
-      class="hotspot start"
+    <div class="menu-mask" aria-hidden="true"></div>
+
+    <button class="hotspot start"
       aria-label="開始探索占卜服務"
-      onclick="go('services')">
-    </button>
+      onclick="go('services')"></button>
 
-    <button
-      class="hotspot feature1"
+    <button class="hotspot feature1"
       aria-label="52張神諭牌"
-      onclick="go('services')">
-    </button>
+      onclick="go('services')"></button>
 
-    <button
-      class="hotspot feature2"
+    <button class="hotspot feature2"
       aria-label="深度探索"
-      onclick="go('services')">
-    </button>
+      onclick="go('services')"></button>
 
-    <button
-      class="hotspot feature3"
+    <button class="hotspot feature3"
       aria-label="付款方式"
-      onclick="showInfo('payment')">
-    </button>
+      onclick="showInfo('payment')"></button>
 
-    <button
-      class="hotspot feature4"
+    <button class="hotspot feature4"
       aria-label="尊重隱私"
-      onclick="showInfo('privacy')">
-    </button>
-
+      onclick="showInfo('privacy')"></button>
   </div>
 </section>
 
-<!-- 第二頁：服務選擇 -->
+<!-- 服務選單 -->
 <section id="services">
-
   <h2>選擇占卜服務</h2>
-
   <p>請選擇最接近你目前疑惑的方向。</p>
 
   <div class="grid">
-
     <div class="choice" role="button" tabindex="0"
       onclick="choose('感情占卜')"
       onkeydown="if(event.key==='Enter')choose('感情占卜')">
@@ -304,58 +247,43 @@ footer {
       <b>靈性指引</b>
       <small>內在探索、人生方向</small>
     </div>
-
   </div>
 
   <button class="secondary" onclick="go('home')">
     ← 返回品牌首頁
   </button>
-
 </section>
 
-<!-- 第三頁：抽牌 -->
+<!-- 抽牌頁面 -->
 <section id="reading">
-
   <h2 id="topic">神諭牌占卜</h2>
-
   <p>靜下心來，想著你想詢問的問題。</p>
 
   <label for="question">你的問題（可選填）</label>
-
-  <textarea
-    id="question"
+  <textarea id="question"
     placeholder="請輸入想詢問的事情"></textarea>
 
-  <button onclick="draw()">
-    洗牌並抽一張神諭牌
-  </button>
+  <button onclick="draw()">洗牌並抽一張神諭牌</button>
 
   <div id="result" class="panel">
     <h2 id="cardname"></h2>
     <p id="meaning"></p>
   </div>
 
- 
-
   <button class="secondary" onclick="go('services')">
     ← 返回服務選單
   </button>
-
 </section>
 
-<!-- 資訊頁 -->
+<!-- 資訊頁面 -->
 <section id="info">
-
   <h2 id="infoTitle"></h2>
-
   <div class="panel">
     <p id="infoText"></p>
   </div>
-
   <button class="secondary" onclick="go('home')">
     ← 返回品牌首頁
   </button>
-
 </section>
 
 </main>
@@ -369,42 +297,39 @@ const words = "純真|獨立|獨創力|新的契機|領導力|奉獻|蛻變|成�
 
 let selected = "神諭占卜";
 
-function go(id) {
+function go(id){
   document.querySelectorAll("section").forEach(
-    x => x.classList.remove("active")
+    section => section.classList.remove("active")
   );
-
   document.getElementById(id).classList.add("active");
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
-function choose(topic) {
+function choose(topic){
   selected = topic;
   document.getElementById("topic").textContent = topic;
   document.getElementById("result").style.display = "none";
   go("reading");
 }
 
-function showInfo(type) {
+function showInfo(type){
   const title = document.getElementById("infoTitle");
   const text = document.getElementById("infoText");
 
-  if (type === "payment") {
+  if(type === "payment"){
     title.textContent = "付款方式";
-    text.textContent =
-      "付款方式包含 LINE Pay Money 與銀行轉帳。實際付款資訊將於正式服務流程中提供。";
-  } else {
+    text.textContent = "LINE Pay Money、銀行轉帳";
+  }else{
     title.textContent = "尊重隱私";
     text.textContent =
-      "我們重視你的個人資料與占卜問題。正式服務將提供資料處理、保存及隱私說明。";
+      "我們重視你的個人資料與占卜問題，並將提供清楚的資料處理與隱私說明。";
   }
-
   go("info");
 }
 
-function draw() {
-  const i = Math.floor(Math.random() * names.length);
-  const reverse = Math.random() < 0.5;
+function draw(){
+  const i = Math.floor(Math.random()*names.length);
+  const reverse = Math.random()<0.5;
   const side = reverse ? "逆位" : "正位";
 
   document.getElementById("cardname").textContent =
@@ -420,6 +345,5 @@ function draw() {
   document.getElementById("result").style.display = "block";
 }
 </script>
-
 </body>
 </html>
