@@ -3,90 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>神諭牌占卜工作室</title>
+<title>我與肥貓·神諭占卜</title>
 <style>
-body{margin:0;background:#f5efe7;color:#332d29;font-family:-apple-system,BlinkMacSystemFont,sans-serif;text-align:center}
-main{max-width:480px;margin:auto;padding:48px 22px}
-h1{font-size:30px}
-p{line-height:1.8}
-.card{background:#fffaf3;border:1px solid #d8c6b4;border-radius:20px;padding:38px 18px;margin:30px 0;box-shadow:0 8px 25px #0001}
-button{background:#41342d;color:white;border:0;border-radius:12px;padding:17px 35px;font-size:18px;cursor:pointer}
-#result{font-size:23px;font-weight:bold;margin:18px 0}
-small{color:#796e66}
+*{box-sizing:border-box}
+body{margin:0;background:#100f0e;color:#ebd4ae;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif}
+header{padding:22px 18px;border-bottom:1px solid #5d4a34;font-weight:700}
+main{max-width:600px;margin:auto;padding:28px 20px 55px}
+section{display:none}
+section.active{display:block}
+.hero{text-align:center;padding:35px 0 30px}
+.moon{font-size:88px;color:#d6ad70;margin:12px 0}
+.cat{font-size:75px;margin:15px 0}
+h1{font-size:clamp(29px,8vw,42px);line-height:1.5;margin:20px 0}
+h2{font-size:27px}
+p{color:#c4b4a2;line-height:1.9}
+.english{font-size:12px;letter-spacing:3px;color:#d2ae78}
+button{cursor:pointer;border:1px solid #a98454;background:#c9a16a;color:#17120f;border-radius:13px;padding:16px 20px;font-size:17px;font-weight:700;width:100%;margin-top:14px}
+button.secondary{background:transparent;color:#dfc18e}
+.panel{border:1px solid #594833;background:#1d1a17;border-radius:18px;padding:22px;margin:16px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:25px 0}
+.choice{border:1px solid #705537;border-radius:16px;padding:20px 12px;background:#211c17;text-align:center;cursor:pointer}
+.choice b{display:block;font-size:19px;margin:10px 0}
+.choice small{color:#b9a999;line-height:1.6}
+.choice .symbol{font-size:30px}
+input,textarea{width:100%;background:#171411;border:1px solid #806342;border-radius:10px;color:#f5e4c8;padding:15px;font:inherit}
+textarea{min-height:110px}
+#result{display:none}
+footer{text-align:center;border-top:1px solid #46382b;padding:24px;color:#bca587;font-size:13px}
+@media(max-width:350px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<header>☾ 我與肥貓·神諭占卜</header>
 <main>
-<h1>☾ 神諭牌占卜工作室</h1>
-<p>靜下心來，想著你想詢問的問題。<br>讓神諭牌為你帶來一份指引。</p>
-<div class="card">
-<div style="font-size:54px">✦</div>
-<div id="result">準備好接收指引了嗎？</div>
-<p id="meaning">點擊下方按鈕，抽出你的神諭牌。</p>
+<section id="home" class="active">
+<div class="hero">
+<div class="english">ORACLE CARD READING</div>
+<div class="moon">☾</div>
+<div class="cat">🐈‍⬛</div>
+<h1>我與肥貓<br>·神諭占卜</h1>
+<p>在迷惘之中，找到屬於自己的方向。</p>
+<p>透過52張神諭牌，結合象徵與心理探索，陪你梳理內心疑惑，看見不同的可能。</p>
+<button onclick="go('services')">開始探索占卜服務 →</button>
 </div>
-<button onclick="drawCard()">洗牌並抽一張牌</button>
-<p><small>占卜結果供自我探索與參考</small></p>
+<div class="panel"><b>✧ 52張神諭牌</b><p>從牌卡象徵中獲得不同視角與提醒。</p></div>
+<div class="panel"><b>☽ 深度探索</b><p>結合牌義、直覺與心理層面的自我理解。</p></div>
+<div class="panel"><b>◇ 付款方式</b><p>LINE Pay Money、銀行轉帳（尚未啟用收款）。</p></div>
+<div class="panel"><b>♧ 尊重隱私</b><p>正式服務將提供資料處理與隱私說明。</p></div>
+</section>
+<section id="services">
+<h2>選擇占卜服務</h2>
+<p>請選擇最接近你目前疑惑的方向。</p>
+<div class="grid">
+<div class="choice" onclick="choose('感情占卜')"><span class="symbol">♡</span><b>感情占卜</b><small>曖昧、復合、桃花、關係</small></div>
+<div class="choice" onclick="choose('事業占卜')"><span class="symbol">♧</span><b>事業占卜</b><small>工作、轉職、創業、發展</small></div>
+<div class="choice" onclick="choose('財運占卜')"><span class="symbol">◇</span><b>財運占卜</b><small>財務、收入、金錢規劃</small></div>
+<div class="choice" onclick="choose('靈性指引')"><span class="symbol">☾</span><b>靈性指引</b><small>內在探索、人生方向</small></div>
+</div>
+<button class="secondary" onclick="go('home')">← 返回品牌首頁</button>
+</section>
+<section id="reading">
+<h2 id="topic">神諭牌占卜</h2>
+<p>靜下心來，想著你想詢問的問題。</p>
+<label for="question">你的問題（可選填）</label>
+<textarea id="question" placeholder="請輸入想詢問的事情"></textarea>
+<button onclick="draw()">洗牌並抽一張神諭牌</button>
+<div id="result" class="panel">
+<h2 id="cardname"></h2>
+<p id="meaning"></p>
+</div>
+<p>占卜結果供自我探索參考，不保證特定結果。目前不收費。</p>
+<button class="secondary" onclick="go('services')">← 返回服務選單</button>
+</section>
 </main>
+<footer>© 我與肥貓·神諭占卜</footer>
 <script>
-const cards=[
-["老鼠與毛茛","純真"],
-["貓與薰衣草","獨立"],
-["蜘蛛與西番蓮","獨創力"],
-["野兔與橡樹","新的契機"],
-["熊與雪松","領導力"],
-["綿羊與黑莓","奉獻"],
-["青蛙與蓮花","蛻變"],
-["花栗鼠與月桂","成功"],
-["麋鹿與梣樹","力量"],
-["黃鼠狼與松樹","反省"],
-["鴨子與菊花","幸運"],
-["山羊與柳樹","克服障礙"],
-["蜥蜴與豬籠草","停滯"],
-["蛾與尤加利","結束"],
-["禿鷹與阿福花","動盪"],
-["鹿與燕麥","療癒"],
-["烏鴉與山茱萸","智力"],
-["蠑螈與黑胡椒","靈感"],
-["野豬與南瓜","信心"],
-["蝙蝠與鐵筷子花","直覺"],
-["鱷魚與罌粟花","夢想"],
-["臭鼬與木蘭花","保護"],
-["貓頭鷹與啤酒花","智慧"],
-["獵犬與西洋梨","忠誠"],
-["貂與毛地黃","淘氣"],
-["狼與玫瑰果","守護"],
-["蜜蜂與石榴","生產力"],
-["狐狸與常春藤","適應力"],
-["負鼠與牡丹花","羞怯"],
-["松鼠與栗子","準備"],
-["河狸與樺樹","家園"],
-["烏龜與芫荽","滿足"],
-["獾與銀杏","傷口癒合"],
-["浣熊與美國梧桐","好奇心"],
-["蛇與蕨類","重新開始"],
-["瓢蟲與香豌豆","快樂"],
-["雀與桃子","戀情"],
-["郊狼與曼陀羅花","欺騙"],
-["豪豬與銀蓮花","界線"],
-["水獺與香蒲","平靜"],
-["山貓與黑刺李","耐心"],
-["蝸牛與越橘","無形中的信任"],
-["鰻魚與鳶尾花","安全感"],
-["鱒魚與鈴蘭花","淨化"],
-["老鷹與薊花","優雅的毅力"],
-["羚羊與小麥","滋養"],
-["蝴蝶與雪花蓮","希望"],
-["公雞與向日葵","溝通"],
-["蜻蜓與三色堇","平衡"],
-["馬與藍鈴花","適度的剛毅"],
-["大公羊與大麗花","決心"],
-["鵪鶉與鵝莓","預期"]
-];
-function drawCard(){
-const i=Math.floor(Math.random()*cards.length);
-const reversed=Math.random()<0.5;
-document.getElementById("result").textContent="#"+i+" "+cards[i][0]+"（"+(reversed?"逆位":"正位")+"）";
-document.getElementById("meaning").textContent="關鍵字："+cards[i][1]+"。"+(reversed?"這張牌提醒你留意目前的阻礙與內在失衡，重新調整方向。":"這張牌鼓勵你發揮這份特質，為目前的問題尋找新的可能。");
+const names="老鼠與毛茛|貓與薰衣草|蜘蛛與西番蓮|野兔與橡樹|熊與雪松|綿羊與黑莓|青蛙與蓮花|花栗鼠與月桂|麋鹿與梣樹|黃鼠狼與松樹|鴨子與菊花|山羊與柳樹|蜥蜴與豬籠草|蛾與尤加利|禿鷹與阿福花|鹿與燕麥|烏鴉與山茱萸|蠑螈與黑胡椒|野豬與南瓜|蝙蝠與鐵筷子花|鱷魚與罌粟花|臭鼬與木蘭花|貓頭鷹與啤酒花|獵犬與西洋梨|貂與毛地黃|狼與玫瑰果|蜜蜂與石榴|狐狸與常春藤|負鼠與牡丹花|松鼠與栗子|河狸與樺樹|烏龜與芫荽|獾與銀杏|浣熊與美國梧桐|蛇與蕨類|瓢蟲與香豌豆|雀與桃子|郊狼與曼陀羅花|豪豬與銀蓮花|水獺與香蒲|山貓與黑刺李|蝸牛與越橘|鰻魚與鳶尾花|鱒魚與鈴蘭花|老鷹與薊花|羚羊與小麥|蝴蝶與雪花蓮|公雞與向日葵|蜻蜓與三色堇|馬與藍鈴花|大公羊與大麗花|鵪鶉與鵝莓".split("|");
+const words="純真|獨立|獨創力|新的契機|領導力|奉獻|蛻變|成功|力量|反省|幸運|克服障礙|停滯|結束|動盪|療癒|智力|靈感|信心|直覺|夢想|保護|智慧|忠誠|淘氣|守護|生產力|適應力|羞怯|準備|家園|滿足|傷口癒合|好奇心|重新開始|快樂|戀情|欺騙|界線|平靜|耐心|無形中的信任|安全感|淨化|優雅的毅力|滋養|希望|溝通|平衡|適度的剛毅|決心|預期".split("|");
+let selected="神諭占卜";
+function go(id){
+document.querySelectorAll("section").forEach(x=>x.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+window.scrollTo(0,0);
+}
+function choose(topic){
+selected=topic;
+document.getElementById("topic").textContent=topic;
+document.getElementById("result").style.display="none";
+go("reading");
+}
+function draw(){
+let i=Math.floor(Math.random()*52);
+let reverse=Math.random()<0.5;
+let side=reverse?"逆位":"正位";
+document.getElementById("cardname").textContent="#"+i+" "+names[i]+"（"+side+"）";
+document.getElementById("meaning").textContent="關鍵字："+words[i]+"。這張牌在"+selected+"的問題中，"+(reverse?"提醒你留意阻礙、情緒與尚未處理的課題，先調整步調。":"鼓勵你從這項特質尋找新的方向，並以實際行動逐步前進。");
+document.getElementById("result").style.display="block";
 }
 </script>
 </body>
